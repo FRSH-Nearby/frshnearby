@@ -427,6 +427,7 @@
   "landingRoleConsumer": "Konsument",
   "landingRoleFarmer": "Matproducent",
   "landingRoleRestaurant": "Restaurang/butik",
+  "landingRoleBusinessAssociate": "Affärspartner",
   "landingRoleSupporter": "Vän av närproducerat",
   "landingFormSubmit": "Gå med i väntelistan",
   "landingFormConsentLabel": "Jag samtycker till att FRSH nearby Oy får samla in, lagra, bevara och på annat sätt behandla de personuppgifter som jag lämnar via detta formulär för att administrera väntelistan, kontakta mig i samband med lanseringen av FRSH nearby-appen samt skicka relaterade meddelanden och uppdateringar i enlighet med integritetspolicyn.",

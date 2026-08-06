@@ -1387,6 +1387,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingRoleRestaurant => 'Restaurant / Shop';
 
   @override
+  String get landingRoleBusinessAssociate => 'Business Associate';
+
+  @override
   String get landingRoleSupporter => 'Local food supporter';
 
   @override

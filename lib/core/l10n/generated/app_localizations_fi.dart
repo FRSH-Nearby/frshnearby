@@ -1393,6 +1393,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get landingRoleRestaurant => 'Ravintola/Kauppa';
 
   @override
+  String get landingRoleBusinessAssociate => 'Liikekumppani';
+
+  @override
   String get landingRoleSupporter => 'Lähiruoan ystävä';
 
   @override

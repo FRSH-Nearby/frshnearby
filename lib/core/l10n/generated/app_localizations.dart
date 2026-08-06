@@ -2632,6 +2632,12 @@ abstract class AppLocalizations {
   /// **'Restaurant / Shop'**
   String get landingRoleRestaurant;
 
+  /// No description provided for @landingRoleBusinessAssociate.
+  ///
+  /// In en, this message translates to:
+  /// **'Business Associate'**
+  String get landingRoleBusinessAssociate;
+
   /// No description provided for @landingRoleSupporter.
   ///
   /// In en, this message translates to:

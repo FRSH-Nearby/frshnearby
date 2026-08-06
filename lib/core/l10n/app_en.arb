@@ -427,6 +427,7 @@
   "landingRoleConsumer": "Consumer",
   "landingRoleFarmer": "Food producer",
   "landingRoleRestaurant": "Restaurant / Shop",
+  "landingRoleBusinessAssociate": "Business Associate",
   "landingRoleSupporter": "Local food supporter",
   "landingFormSubmit": "Join the waiting list",
   "landingFormConsentLabel": "I agree that FRSH nearby may collect, store, and process the personal data submitted through this form for the purpose of managing the waiting list, contacting me about the launch of FRSH nearby, and providing related updates, in accordance with the Privacy Policy.",

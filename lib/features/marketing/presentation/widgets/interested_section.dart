@@ -7,13 +7,14 @@ import 'privacy_policy_dialog.dart';
 
 /// Stable role values so the dropdown survives a mid-session locale switch
 /// (localized display labels are resolved at build time).
-enum EarlyAccessRole { consumer, farmer, restaurant }
+enum EarlyAccessRole { consumer, farmer, restaurant, businessAssociate }
 
 extension EarlyAccessRoleLabel on EarlyAccessRole {
   String label(AppLocalizations l10n) => switch (this) {
     EarlyAccessRole.consumer => l10n.landingRoleConsumer,
     EarlyAccessRole.farmer => l10n.landingRoleFarmer,
     EarlyAccessRole.restaurant => l10n.landingRoleRestaurant,
+    EarlyAccessRole.businessAssociate => l10n.landingRoleBusinessAssociate,
   };
 }
 
