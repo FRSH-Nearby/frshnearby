@@ -1,84 +1,89 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../marketing_tokens.dart';
+import 'language_flag_picker.dart';
+import 'landing_footer.dart';
 
-void showPrivacyPolicyDialog(BuildContext context) {
-  final policy = _PrivacyPolicyCopy.forLocale(Localizations.localeOf(context));
+class PrivacyPolicyScreen extends StatelessWidget {
+  const PrivacyPolicyScreen({super.key});
 
-  showDialog<void>(
-    context: context,
-    builder: (context) {
-      final screenSize = MediaQuery.sizeOf(context);
-      final maxHeight = screenSize.height * 0.78;
+  @override
+  Widget build(BuildContext context) {
+    final policy = _PrivacyPolicyCopy.forLocale(
+      Localizations.localeOf(context),
+    );
 
-      return Dialog(
-        insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 760, maxHeight: maxHeight),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 20, 16, 12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
+    return Scaffold(
+      backgroundColor: LandingColors.paper,
+      body: SafeArea(
+        child: Scrollbar(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 960),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          if (!kIsWeb) ...[
+                            const Align(
+                              alignment: Alignment.centerRight,
+                              child: LanguageFlagPicker(),
+                            ),
+                            const SizedBox(height: 32),
+                          ],
                           Text(
                             policy.title,
                             style: const TextStyle(
                               color: LandingColors.ink,
-                              fontSize: 24,
+                              fontSize: 32,
                               fontWeight: FontWeight.w900,
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: 8),
                           Text(
                             policy.updated,
                             style: const TextStyle(
                               color: LandingColors.muted,
-                              fontSize: 13,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+                          const SizedBox(height: 24),
+                          const Divider(height: 1, color: LandingColors.line),
+                          const SizedBox(height: 24),
+                          SelectableText.rich(
+                            TextSpan(children: _policySpans(policy.body)),
+                            style: const TextStyle(
+                              color: LandingColors.muted,
+                              fontSize: 16,
+                              height: 1.65,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 48),
+                          if (!kIsWeb) const LandingFooter(),
                         ],
-                      ),
-                    ),
-                    IconButton(
-                      tooltip: policy.closeLabel,
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close_rounded),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(height: 1, color: LandingColors.line),
-              Expanded(
-                child: Scrollbar(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(24, 20, 24, 26),
-                    child: SelectableText.rich(
-                      TextSpan(children: _policySpans(policy.body)),
-                      style: const TextStyle(
-                        color: LandingColors.muted,
-                        fontSize: 14,
-                        height: 1.55,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
               ),
+              if (kIsWeb)
+                const SliverToBoxAdapter(child: LandingFooter(compact: true)),
             ],
           ),
         ),
-      );
-    },
-  );
+      ),
+    );
+  }
 }
 
 String privacyPolicyLinkLabel(BuildContext context) {

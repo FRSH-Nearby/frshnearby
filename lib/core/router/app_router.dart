@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -38,14 +39,19 @@ import '../../features/shared/presentation/app_shell.dart';
 import '../../features/social_feed/domain/feed_post.dart';
 import '../../features/social_feed/presentation/social_feed_screen.dart';
 import '../../features/splash/presentation/splash_screen.dart';
+import '../../features/marketing/presentation/widgets/privacy_policy_dialog.dart';
+import '../../features/marketing/presentation/support_screen.dart';
 import 'app_routes.dart';
+import '../../features/marketing/presentation/website_shell.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authControllerProvider);
   final locationState = ref.watch(marketplaceLocationControllerProvider);
 
   return GoRouter(
-    initialLocation: _browserInitialLocation(),
+    initialLocation: Uri.base.fragment.startsWith('/')
+        ? Uri.base.fragment
+        : null,
     redirect: (context, state) {
       final location = state.matchedLocation;
       final isAuthRoute =
@@ -53,7 +59,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           location == AppRoutes.register ||
           location == AppRoutes.verifyEmail;
       final isPublicRoute =
-          location == AppRoutes.home || location == AppRoutes.prototype;
+          location == AppRoutes.home ||
+          location == AppRoutes.prototype ||
+          location == AppRoutes.privacyPolicy ||
+          location == AppRoutes.support;
       final isFarmerRoute = location.startsWith('/farmer/');
       final isApplicationRoute = location.startsWith('/farmer-application');
       final farmerStatus = authState.user?.farmerProfile?.status;
@@ -99,271 +108,273 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
-      GoRoute(
-        path: AppRoutes.home,
-        builder: (context, state) => const MarketingHomeScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.prototype,
-        builder: (context, state) => const PrototypeHomeScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.splash,
-        builder: (context, state) => const SplashScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.login,
-        builder: (context, state) => const LoginScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.register,
-        builder: (context, state) => const RegisterScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.verifyEmail,
-        builder: (context, state) => const EmailVerificationScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.applyAsFarmer,
-        builder: (context, state) => const ApplyAsFarmerScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerLocation,
-        builder: (context, state) => const FarmerLocationScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerApplicationReview,
-        builder: (context, state) => const FarmerApplicationReviewScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerPendingReview,
-        builder: (context, state) => const FarmerPendingReviewScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerRejected,
-        builder: (context, state) => const FarmerRejectedScreen(),
-      ),
-      GoRoute(
-        path: '/customer/listings/:listingId',
-        builder: (context, state) {
-          return ListingDetailScreen(
-            listingId: state.pathParameters['listingId']!,
-          );
-        },
-      ),
-      GoRoute(
-        path: '/customer/farmers/:farmerId',
-        builder: (context, state) {
-          return FarmerPublicProfileScreen(
-            farmerId: state.pathParameters['farmerId']!,
-            preview: state.uri.queryParameters['preview'] == 'true',
-          );
-        },
-      ),
-      GoRoute(
-        path: '/customer/chat/:threadId',
-        builder: (context, state) {
-          return ChatThreadScreen(threadId: state.pathParameters['threadId']!);
-        },
-      ),
-      GoRoute(
-        path: '/customer/deals/:dealId/rate',
-        builder: (context, state) {
-          return RatingScreen(dealId: state.pathParameters['dealId']!);
-        },
-      ),
-      GoRoute(
-        path: AppRoutes.customerSearch,
-        pageBuilder:
-            (context, state) => CustomTransitionPage(
+      ShellRoute(
+        builder: (context, state, child) =>
+            kIsWeb ? WebsiteShell(child: child) : child,
+        routes: [
+          GoRoute(
+            path: AppRoutes.support,
+            builder: (context, state) => const SupportScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.privacyPolicy,
+            builder: (context, state) => const PrivacyPolicyScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.home,
+            builder: (context, state) => const MarketingHomeScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.prototype,
+            builder: (context, state) => const PrototypeHomeScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.splash,
+            builder: (context, state) => const SplashScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.login,
+            builder: (context, state) => const LoginScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.register,
+            builder: (context, state) => const RegisterScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.verifyEmail,
+            builder: (context, state) => const EmailVerificationScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.applyAsFarmer,
+            builder: (context, state) => const ApplyAsFarmerScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.farmerLocation,
+            builder: (context, state) => const FarmerLocationScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.farmerApplicationReview,
+            builder: (context, state) => const FarmerApplicationReviewScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.farmerPendingReview,
+            builder: (context, state) => const FarmerPendingReviewScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.farmerRejected,
+            builder: (context, state) => const FarmerRejectedScreen(),
+          ),
+          GoRoute(
+            path: '/customer/listings/:listingId',
+            builder: (context, state) {
+              return ListingDetailScreen(
+                listingId: state.pathParameters['listingId']!,
+              );
+            },
+          ),
+          GoRoute(
+            path: '/customer/farmers/:farmerId',
+            builder: (context, state) {
+              return FarmerPublicProfileScreen(
+                farmerId: state.pathParameters['farmerId']!,
+                preview: state.uri.queryParameters['preview'] == 'true',
+              );
+            },
+          ),
+          GoRoute(
+            path: '/customer/chat/:threadId',
+            builder: (context, state) {
+              return ChatThreadScreen(
+                threadId: state.pathParameters['threadId']!,
+              );
+            },
+          ),
+          GoRoute(
+            path: '/customer/deals/:dealId/rate',
+            builder: (context, state) {
+              return RatingScreen(dealId: state.pathParameters['dealId']!);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.customerSearch,
+            pageBuilder: (context, state) => CustomTransitionPage(
               key: state.pageKey,
               child: const CustomerSearchScreen(),
               transitionDuration: const Duration(milliseconds: 260),
               reverseTransitionDuration: const Duration(milliseconds: 200),
-              transitionsBuilder: (
-                context,
-                animation,
-                secondaryAnimation,
-                child,
-              ) {
-                final curved = CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeOutCubic,
-                );
-                return FadeTransition(
-                  opacity: curved,
-                  child: ScaleTransition(
-                    scale: Tween<double>(begin: 0.94, end: 1.0).animate(curved),
-                    child: child,
-                  ),
-                );
-              },
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                    final curved = CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.easeOutCubic,
+                    );
+                    return FadeTransition(
+                      opacity: curved,
+                      child: ScaleTransition(
+                        scale: Tween<double>(
+                          begin: 0.94,
+                          end: 1.0,
+                        ).animate(curved),
+                        child: child,
+                      ),
+                    );
+                  },
             ),
-      ),
-      GoRoute(
-        path: AppRoutes.customerMessages,
-        builder: (context, state) => const CustomerMessagesScreen(),
-      ),
-      StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) {
-          return AppShell(
-            navigationShell: navigationShell,
-            mode: AppShellMode.customer,
-          );
-        },
-        branches: [
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.customerMap,
-                pageBuilder: _pageBuilder(const CustomerMapScreen()),
-              ),
-            ],
           ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.customerHome,
-                pageBuilder: _pageBuilder(const CustomerHomeScreen()),
-              ),
-            ],
+          GoRoute(
+            path: AppRoutes.customerMessages,
+            builder: (context, state) => const CustomerMessagesScreen(),
           ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.customerCommunity,
-                pageBuilder:
-                    (context, state) => NoTransitionPage(
+          StatefulShellRoute.indexedStack(
+            builder: (context, state, navigationShell) {
+              return AppShell(
+                navigationShell: navigationShell,
+                mode: AppShellMode.customer,
+              );
+            },
+            branches: [
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.customerMap,
+                    pageBuilder: _pageBuilder(const CustomerMapScreen()),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.customerHome,
+                    pageBuilder: _pageBuilder(const CustomerHomeScreen()),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.customerCommunity,
+                    pageBuilder: (context, state) => NoTransitionPage(
                       child: SocialFeedScreen(
                         viewerType: FeedActorType.consumer,
                         focusPostId: state.uri.queryParameters['post'],
                         focusCommentId: state.uri.queryParameters['comment'],
                       ),
                     ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.customerDeals,
-                pageBuilder: _pageBuilder(const CustomerDealsScreen()),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.customerProfile,
-                pageBuilder: _pageBuilder(const CustomerProfileScreen()),
+              StatefulShellBranch(
                 routes: [
                   GoRoute(
-                    path: 'settings',
-                    builder: (context, state) => const SettingsScreen(),
+                    path: AppRoutes.customerDeals,
+                    pageBuilder: _pageBuilder(const CustomerDealsScreen()),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.customerProfile,
+                    pageBuilder: _pageBuilder(const CustomerProfileScreen()),
+                    routes: [
+                      GoRoute(
+                        path: 'settings',
+                        builder: (context, state) => const SettingsScreen(),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-        ],
-      ),
-      StatefulShellRoute.indexedStack(
-        builder:
-            (context, state, navigationShell) => AppShell(
+          StatefulShellRoute.indexedStack(
+            builder: (context, state, navigationShell) => AppShell(
               navigationShell: navigationShell,
               mode: AppShellMode.farmer,
             ),
-        branches: [
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.farmerDashboard,
-                pageBuilder: _pageBuilder(const FarmerDashboardScreen()),
+            branches: [
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.farmerDashboard,
+                    pageBuilder: _pageBuilder(const FarmerDashboardScreen()),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.farmerDeals,
+                    pageBuilder: _pageBuilder(const FarmerDealsScreen()),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.farmerInsights,
+                    pageBuilder: _pageBuilder(const FarmerInsightsScreen()),
+                  ),
+                ],
               ),
             ],
           ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.farmerDeals,
-                pageBuilder: _pageBuilder(const FarmerDealsScreen()),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.farmerInsights,
-                pageBuilder: _pageBuilder(const FarmerInsightsScreen()),
-              ),
-            ],
-          ),
-        ],
-      ),
-      GoRoute(
-        path: AppRoutes.farmerCommunity,
-        builder:
-            (context, state) => SocialFeedScreen(
+          GoRoute(
+            path: AppRoutes.farmerCommunity,
+            builder: (context, state) => SocialFeedScreen(
               viewerType: FeedActorType.farmer,
               openComposer: state.uri.queryParameters['create'] == 'true',
               focusPostId: state.uri.queryParameters['post'],
               focusCommentId: state.uri.queryParameters['comment'],
             ),
-      ),
-      GoRoute(
-        path: AppRoutes.createListing,
-        builder: (context, state) => const CreateListingScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.editFarmProfile,
-        builder: (context, state) => const EditFarmProfileScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerSettings,
-        builder: (context, state) => const SettingsScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerListings,
-        redirect: (context, state) => AppRoutes.farmerDashboard,
-      ),
-      GoRoute(
-        path: '/farmer/listings/:listingId/edit',
-        builder:
-            (context, state) => EditListingScreen(
+          ),
+          GoRoute(
+            path: AppRoutes.createListing,
+            builder: (context, state) => const CreateListingScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.editFarmProfile,
+            builder: (context, state) => const EditFarmProfileScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.farmerSettings,
+            builder: (context, state) => const SettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.farmerListings,
+            redirect: (context, state) => AppRoutes.farmerDashboard,
+          ),
+          GoRoute(
+            path: '/farmer/listings/:listingId/edit',
+            builder: (context, state) => EditListingScreen(
               listingId: state.pathParameters['listingId']!,
             ),
-      ),
-      GoRoute(
-        path: '/farmer/listings/:listingId/preview',
-        builder:
-            (context, state) => ListingPreviewScreen(
+          ),
+          GoRoute(
+            path: '/farmer/listings/:listingId/preview',
+            builder: (context, state) => ListingPreviewScreen(
               listingId: state.pathParameters['listingId']!,
             ),
-      ),
-      GoRoute(
-        path: '/farmer/orders/:orderId',
-        builder:
-            (context, state) => FarmerOrderDetailScreen(
+          ),
+          GoRoute(
+            path: '/farmer/orders/:orderId',
+            builder: (context, state) => FarmerOrderDetailScreen(
               orderId: state.pathParameters['orderId']!,
             ),
-      ),
-      GoRoute(
-        path: AppRoutes.farmerMessages,
-        redirect: (context, state) => AppRoutes.farmerDashboard,
-      ),
-      GoRoute(
-        path: AppRoutes.farmerReviews,
-        redirect: (context, state) => AppRoutes.farmerDashboard,
+          ),
+          GoRoute(
+            path: AppRoutes.farmerMessages,
+            redirect: (context, state) => AppRoutes.farmerDashboard,
+          ),
+          GoRoute(
+            path: AppRoutes.farmerReviews,
+            redirect: (context, state) => AppRoutes.farmerDashboard,
+          ),
+        ],
       ),
     ],
   );
 });
-
-String _browserInitialLocation() {
-  final fragment = Uri.base.fragment;
-  if (fragment.startsWith('/')) return fragment;
-  return AppRoutes.home;
-}
 
 Page<dynamic> Function(BuildContext, GoRouterState) _pageBuilder(Widget child) {
   return (context, state) => NoTransitionPage(child: child);

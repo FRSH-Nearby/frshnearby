@@ -6,7 +6,9 @@ import 'hover_lift.dart';
 
 /// "For consumers": three feature cards for consumers.
 class ConsumersSection extends StatelessWidget {
-  const ConsumersSection({super.key});
+  const ConsumersSection({super.key, this.showHeading = true});
+
+  final bool showHeading;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,10 @@ class ConsumersSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionHeading(title: l10n.landingConsumersTitle),
-        const SizedBox(height: 24),
+        if (showHeading) ...[
+          _SectionHeading(title: l10n.landingConsumersTitle),
+          const SizedBox(height: 24),
+        ],
         _FeatureCards(cards: cards),
       ],
     );

@@ -1255,7 +1255,61 @@ class AppLocalizationsFi extends AppLocalizations {
   String get verifiedCustomerLabel => 'Vahvistettu asiakas';
 
   @override
-  String get landingNavAbout => 'Meistä';
+  String get landingMissionTitle => 'Missio';
+
+  @override
+  String get landingApplicationTitle => 'N?in se toimii';
+
+  @override
+  String get landingMissionBody =>
+      'Teemme l?hiruoan l?yt?misest?, ostamisesta ja nauttimisesta helppoa. Yhdist?m?ll? ihmiset suoraan l?hialueen ruoantuottajiin autamme tuottajia ansaitsemaan enemm?n, pid?mme ruoan tuoreena ja vahvistamme paikallisia yhteis?j?.';
+
+  @override
+  String get landingApplicationBody =>
+      'Tutustu siihen, miten FRSH Nearby yhdist?? tuottajat ja asiakkaat tuotteiden jakamisesta tilausten hallintaan.';
+
+  @override
+  String get landingNavSupport => 'Tuki';
+
+  @override
+  String get supportTitle => 'Tekninen tuki';
+
+  @override
+  String get supportIntro =>
+      'Tarvitsetko apua FRSH Nearbyn k?yt?ss?? Kokeile alla olevia vinkkej? tai ota yhteytt? teknisess? ongelmassa.';
+
+  @override
+  String get supportTroubleshootTitle => 'Nopeat vianm??ritysvinkit';
+
+  @override
+  String get supportTroubleshootBody =>
+      'P?ivit? sivu, jos jokin ei lataudu. Jos ongelma jatkuu, kokeile p?ivitetty? selainta ja tarkista internetyhteytesi.';
+
+  @override
+  String get supportReportTitle => 'Ilmoita teknisest? ongelmasta';
+
+  @override
+  String get supportReportBody =>
+      'Kerro, mit? yritit tehd?, mit? tapahtui ja miten ongelma toistuu. Mainitse selaimesi, laitteesi ja mahdollinen virheilmoitus. ?l? l?het? salasanoja tai maksutietoja.';
+
+  @override
+  String get supportContactTitle => 'Ota yhteytt? tukeen';
+
+  @override
+  String get supportContactBody =>
+      'L?het? s?hk?postia osoitteeseen info@frshnearby.com, jos tarvitset apua verkkosivuston tai sovelluksen kanssa.';
+
+  @override
+  String get supportEmailAction => 'L?het? s?hk?postia';
+
+  @override
+  String get supportBackHome => 'Takaisin etusivulle';
+
+  @override
+  String get supportEmailSubject => 'FRSH Nearby ? tekninen tuki';
+
+  @override
+  String get landingNavAbout => 'Tarinamme';
 
   @override
   String get landingNavInterested => 'Kiinnostuitko?';
@@ -1287,7 +1341,7 @@ class AppLocalizationsFi extends AppLocalizations {
       'Rakennettu lähiruoalle kaikkialla Euroopassa';
 
   @override
-  String get landingAboutTitle => 'Meistä';
+  String get landingAboutTitle => 'Tarinamme';
 
   @override
   String get landingAboutBody =>

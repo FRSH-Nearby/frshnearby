@@ -6,7 +6,9 @@ import 'hover_lift.dart';
 
 /// "For producers": four feature cards for food producers.
 class ProducersSection extends StatelessWidget {
-  const ProducersSection({super.key});
+  const ProducersSection({super.key, this.showHeading = true});
+
+  final bool showHeading;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +40,10 @@ class ProducersSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionHeading(title: l10n.landingProducersTitle),
-        const SizedBox(height: 24),
+        if (showHeading) ...[
+          _SectionHeading(title: l10n.landingProducersTitle),
+          const SizedBox(height: 24),
+        ],
         _FeatureCards(cards: cards),
       ],
     );

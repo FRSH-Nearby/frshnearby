@@ -1249,7 +1249,61 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifiedCustomerLabel => 'Verified customer';
 
   @override
-  String get landingNavAbout => 'About us';
+  String get landingMissionTitle => 'Mission';
+
+  @override
+  String get landingApplicationTitle => 'How it works';
+
+  @override
+  String get landingMissionBody =>
+      'We make local food easy to discover, buy and enjoy. By connecting people directly with nearby food producers, we help producers earn more, keep food fresh and strengthen local communities.';
+
+  @override
+  String get landingApplicationBody =>
+      'Discover how FRSH Nearby brings producers and customers together, from sharing products to managing orders.';
+
+  @override
+  String get landingNavSupport => 'Support';
+
+  @override
+  String get supportTitle => 'Technical support';
+
+  @override
+  String get supportIntro =>
+      'Need help using FRSH Nearby? Start with the tips below or contact us about a technical issue.';
+
+  @override
+  String get supportTroubleshootTitle => 'Quick troubleshooting';
+
+  @override
+  String get supportTroubleshootBody =>
+      'Refresh the page if something does not load. If the problem continues, try an updated browser and check your internet connection.';
+
+  @override
+  String get supportReportTitle => 'Report a technical issue';
+
+  @override
+  String get supportReportBody =>
+      'Tell us what you were trying to do, what happened, and the steps to reproduce the issue. Include your browser, device, and any error message. Please do not send passwords or payment details.';
+
+  @override
+  String get supportContactTitle => 'Contact support';
+
+  @override
+  String get supportContactBody =>
+      'Email info@frshnearby.com for help with the website or application.';
+
+  @override
+  String get supportEmailAction => 'Email support';
+
+  @override
+  String get supportBackHome => 'Back to home';
+
+  @override
+  String get supportEmailSubject => 'FRSH Nearby technical support';
+
+  @override
+  String get landingNavAbout => 'Our story';
 
   @override
   String get landingNavInterested => 'Interested?';
@@ -1280,7 +1334,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingMapCaption => 'Built for local food across Europe';
 
   @override
-  String get landingAboutTitle => 'About us';
+  String get landingAboutTitle => 'Our story';
 
   @override
   String get landingAboutBody =>

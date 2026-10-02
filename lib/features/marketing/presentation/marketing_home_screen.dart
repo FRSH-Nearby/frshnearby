@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,13 +7,13 @@ import '../../../core/router/app_routes.dart';
 import '../data/early_access_submission.dart';
 import 'marketing_tokens.dart';
 import 'widgets/about_section.dart';
-import 'widgets/consumers_section.dart';
 import 'widgets/hero_section.dart';
 import 'widgets/interested_section.dart';
 import 'widgets/landing_footer.dart';
 import 'widgets/landing_top_bar.dart';
-import 'widgets/producers_section.dart';
 import 'widgets/reveal_on_scroll.dart';
+import 'widgets/mission_section.dart';
+import 'widgets/application_section.dart';
 
 /// Animated farm-themed landing page. All copy comes from AppLocalizations,
 /// so the flag picker in the top bar re-localizes the whole page (and the
@@ -30,12 +31,15 @@ class _MarketingHomeScreenState extends ConsumerState<MarketingHomeScreen> {
   final _countryController = TextEditingController(text: 'Finland');
   final _phoneController = TextEditingController();
   final _messageController = TextEditingController();
+  final _missionKey = GlobalKey();
+  final _applicationKey = GlobalKey();
   final _aboutKey = GlobalKey();
   final _formKey = GlobalKey();
 
   EarlyAccessRole _role = EarlyAccessRole.consumer;
   bool _consentAccepted = false;
   bool _submitted = false;
+  String? _lastSection;
 
   void _syncDefaultCountry(Locale locale) {
     final localizedDefault = locale.languageCode == 'fi' ? 'Suomi' : 'Finland';
@@ -90,6 +94,22 @@ class _MarketingHomeScreenState extends ConsumerState<MarketingHomeScreen> {
   @override
   Widget build(BuildContext context) {
     _syncDefaultCountry(Localizations.localeOf(context));
+    final section = GoRouterState.of(context).uri.queryParameters['section'];
+    if (section != _lastSection) {
+      _lastSection = section;
+      final target = switch (section) {
+        'mission' => _missionKey,
+        'application' => _applicationKey,
+        'about' => _aboutKey,
+        'interested' => _formKey,
+        _ => null,
+      };
+      if (target != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _scrollTo(target);
+        });
+      }
+    }
 
     return Scaffold(
       backgroundColor: LandingColors.paper,
@@ -105,20 +125,30 @@ class _MarketingHomeScreenState extends ConsumerState<MarketingHomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        LandingTopBar(
-                          onAbout: () => _scrollTo(_aboutKey),
-                          onInterested: () => _scrollTo(_formKey),
-                          onPrototype: _openPrototype,
-                        ),
+                        if (!kIsWeb)
+                          LandingTopBar(
+                            onMission: () => _scrollTo(_missionKey),
+                            onApplication: () => _scrollTo(_applicationKey),
+                            onAbout: () => _scrollTo(_aboutKey),
+                            onInterested: () => _scrollTo(_formKey),
+                            onSupport: () => context.push(AppRoutes.support),
+                            onPrototype: _openPrototype,
+                          ),
                         const SizedBox(height: 18),
                         HeroSection(
                           onJoin: () => _scrollTo(_formKey),
                           onPrototype: _openPrototype,
                         ),
                         const SizedBox(height: 64),
-                        const RevealOnScroll(child: ProducersSection()),
+                        RevealOnScroll(
+                          key: _missionKey,
+                          child: const MissionSection(),
+                        ),
                         const SizedBox(height: 64),
-                        const RevealOnScroll(child: ConsumersSection()),
+                        RevealOnScroll(
+                          key: _applicationKey,
+                          child: const ApplicationSection(),
+                        ),
                         const SizedBox(height: 64),
                         RevealOnScroll(
                           key: _aboutKey,
@@ -145,13 +175,16 @@ class _MarketingHomeScreenState extends ConsumerState<MarketingHomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 48),
-                        const RevealOnScroll(child: LandingFooter()),
+                        if (!kIsWeb)
+                          const RevealOnScroll(child: LandingFooter()),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
+            if (kIsWeb)
+              const SliverToBoxAdapter(child: LandingFooter(compact: true)),
           ],
         ),
       ),

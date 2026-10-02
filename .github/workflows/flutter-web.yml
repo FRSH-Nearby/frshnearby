@@ -37,6 +37,13 @@ jobs:
       - name: Build web
         run: flutter build web --release --base-href /
 
+      - name: Add direct page entry points
+        run: |
+          mkdir -p build/web/privacypolicy build/web/support
+          cp build/web/index.html build/web/privacypolicy/index.html
+          cp build/web/index.html build/web/support/index.html
+          cp build/web/index.html build/web/404.html
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

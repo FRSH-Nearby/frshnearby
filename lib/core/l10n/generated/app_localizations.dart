@@ -2386,10 +2386,106 @@ abstract class AppLocalizations {
   /// **'Verified customer'**
   String get verifiedCustomerLabel;
 
+  /// No description provided for @landingMissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mission'**
+  String get landingMissionTitle;
+
+  /// No description provided for @landingApplicationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How it works'**
+  String get landingApplicationTitle;
+
+  /// No description provided for @landingMissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We make local food easy to discover, buy and enjoy. By connecting people directly with nearby food producers, we help producers earn more, keep food fresh and strengthen local communities.'**
+  String get landingMissionBody;
+
+  /// No description provided for @landingApplicationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover how FRSH Nearby brings producers and customers together, from sharing products to managing orders.'**
+  String get landingApplicationBody;
+
+  /// No description provided for @landingNavSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get landingNavSupport;
+
+  /// No description provided for @supportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical support'**
+  String get supportTitle;
+
+  /// No description provided for @supportIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help using FRSH Nearby? Start with the tips below or contact us about a technical issue.'**
+  String get supportIntro;
+
+  /// No description provided for @supportTroubleshootTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick troubleshooting'**
+  String get supportTroubleshootTitle;
+
+  /// No description provided for @supportTroubleshootBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh the page if something does not load. If the problem continues, try an updated browser and check your internet connection.'**
+  String get supportTroubleshootBody;
+
+  /// No description provided for @supportReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a technical issue'**
+  String get supportReportTitle;
+
+  /// No description provided for @supportReportBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what you were trying to do, what happened, and the steps to reproduce the issue. Include your browser, device, and any error message. Please do not send passwords or payment details.'**
+  String get supportReportBody;
+
+  /// No description provided for @supportContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get supportContactTitle;
+
+  /// No description provided for @supportContactBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Email info@frshnearby.com for help with the website or application.'**
+  String get supportContactBody;
+
+  /// No description provided for @supportEmailAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Email support'**
+  String get supportEmailAction;
+
+  /// No description provided for @supportBackHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get supportBackHome;
+
+  /// No description provided for @supportEmailSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'FRSH Nearby technical support'**
+  String get supportEmailSubject;
+
   /// No description provided for @landingNavAbout.
   ///
   /// In en, this message translates to:
-  /// **'About us'**
+  /// **'Our story'**
   String get landingNavAbout;
 
   /// No description provided for @landingNavInterested.
@@ -2449,7 +2545,7 @@ abstract class AppLocalizations {
   /// No description provided for @landingAboutTitle.
   ///
   /// In en, this message translates to:
-  /// **'About us'**
+  /// **'Our story'**
   String get landingAboutTitle;
 
   /// No description provided for @landingAboutBody.

@@ -98,15 +98,18 @@ http://127.0.0.1:5173
 Useful prototype routes:
 
 ```text
-/#/
-/#/prototype
-/#/farmer/dashboard
-/#/customer/home
-/#/customer/farmers/farmer-1
-/#/customer/deals
+/
+/prototype
+/farmer/dashboard
+/customer/home
+/customer/farmers/farmer-1
+/customer/deals
 ```
 
-The public website lives at `/#/`. The prototype entry point is `/#/prototype`.
+The public website lives at `/`. The prototype entry point is `/prototype`.
+The standalone privacy policy is available at `/privacypolicy` without signing in.
+
+Web previews use clean path URLs. The Pages workflow creates a privacy-policy entry point and a fallback page for direct links. Other hosting providers should serve `index.html` for application routes.
 
 ## GitHub Pages
 

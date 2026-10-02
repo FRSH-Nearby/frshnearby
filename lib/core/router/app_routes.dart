@@ -2,6 +2,8 @@ class AppRoutes {
   const AppRoutes._();
 
   static const home = '/';
+  static const privacyPolicy = '/privacypolicy';
+  static const support = '/support';
   static const splash = '/splash';
   static const prototype = '/prototype';
   static const login = '/login';

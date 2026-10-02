@@ -12,62 +12,83 @@ import 'language_flag_picker.dart';
 class LandingTopBar extends StatelessWidget {
   const LandingTopBar({
     super.key,
+    this.onHome,
+    required this.onMission,
+    required this.onApplication,
     required this.onAbout,
     required this.onInterested,
+    required this.onSupport,
     required this.onPrototype,
   });
 
+  final VoidCallback? onHome;
+  final VoidCallback onMission;
+  final VoidCallback onApplication;
   final VoidCallback onAbout;
   final VoidCallback onInterested;
+  final VoidCallback onSupport;
   final VoidCallback onPrototype;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final width = MediaQuery.sizeOf(context).width;
-    final showLinks = width >= 860;
+    final showLinks = width >= 1080;
     final compact = width < 560;
 
-    return Row(
+    final links = <Widget>[
+      _NavLink(label: l10n.landingMissionTitle, onTap: onMission),
+      _NavLink(label: l10n.landingApplicationTitle, onTap: onApplication),
+      _NavLink(label: l10n.landingNavAbout, onTap: onAbout),
+      _NavLink(label: l10n.landingNavInterested, onTap: onInterested),
+      _NavLink(label: l10n.landingNavSupport, onTap: onSupport),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _Wordmark(compact: width < 460),
-        const Spacer(),
-        if (showLinks) ...[
-          _NavLink(label: l10n.landingNavAbout, onTap: onAbout),
-          _NavLink(label: l10n.landingNavInterested, onTap: onInterested),
-          const SizedBox(width: 8),
-        ],
-        const LanguageFlagPicker(),
-        SizedBox(width: compact ? 8 : 16),
-        HoverLift(
-          child: compact
-              ? IconButton.filledTonal(
-                  onPressed: onPrototype,
-                  tooltip: l10n.landingNavPrototype,
-                  style: IconButton.styleFrom(
-                    backgroundColor: LandingColors.mist,
-                    foregroundColor: LandingColors.green,
-                  ),
-                  icon: const Icon(Icons.play_arrow_rounded),
-                )
-              : FilledButton.tonalIcon(
-                  onPressed: onPrototype,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: LandingColors.mist,
-                    foregroundColor: LandingColors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+        Row(
+          children: [
+            InkWell(
+              onTap: onHome,
+              child: _Wordmark(compact: width < 460),
+            ),
+            const Spacer(),
+            if (showLinks) ...[...links, const SizedBox(width: 8)],
+            const LanguageFlagPicker(),
+            SizedBox(width: compact ? 8 : 16),
+            HoverLift(
+              child: compact
+                  ? IconButton.filledTonal(
+                      onPressed: onPrototype,
+                      tooltip: l10n.landingNavPrototype,
+                      style: IconButton.styleFrom(
+                        backgroundColor: LandingColors.mist,
+                        foregroundColor: LandingColors.green,
+                      ),
+                      icon: const Icon(Icons.play_arrow_rounded),
+                    )
+                  : FilledButton.tonalIcon(
+                      onPressed: onPrototype,
+                      style: FilledButton.styleFrom(
+                        backgroundColor: LandingColors.mist,
+                        foregroundColor: LandingColors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        textStyle: const TextStyle(fontWeight: FontWeight.w800),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
+                      ),
+                      icon: const Icon(Icons.play_arrow_rounded, size: 20),
+                      label: Text(l10n.landingNavPrototype),
                     ),
-                    textStyle: const TextStyle(fontWeight: FontWeight.w800),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                  ),
-                  icon: const Icon(Icons.play_arrow_rounded, size: 20),
-                  label: Text(l10n.landingNavPrototype),
-                ),
+            ),
+          ],
         ),
+        if (!showLinks) Wrap(alignment: WrapAlignment.center, children: links),
       ],
     );
   }
@@ -101,7 +122,7 @@ class _NavLink extends StatelessWidget {
       style: TextButton.styleFrom(
         foregroundColor: LandingColors.ink,
         textStyle: const TextStyle(fontWeight: FontWeight.w700),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
       ),
       child: Text(label),
     );
