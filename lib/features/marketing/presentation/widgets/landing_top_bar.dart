@@ -5,9 +5,6 @@ import '../marketing_tokens.dart';
 import 'language_picker.dart';
 
 /// Landing top bar: green wordmark, section links, and language menu.
-///
-/// Uses a text wordmark instead of the logo asset — the logo (and its colors)
-/// is being replaced, so the brand here leans on the green theme only.
 class LandingTopBar extends StatelessWidget {
   const LandingTopBar({
     super.key,
@@ -32,6 +29,84 @@ class LandingTopBar extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     final showLinks = width >= 1080;
 
+    if (!showLinks) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: onHome,
+            child: _Wordmark(compact: width < 460),
+          ),
+          MenuAnchor(
+            alignmentOffset: const Offset(0, 8),
+            style: MenuStyle(
+              backgroundColor: const WidgetStatePropertyAll(Colors.white),
+              surfaceTintColor: const WidgetStatePropertyAll(
+                Colors.transparent,
+              ),
+              shadowColor: WidgetStatePropertyAll(
+                LandingColors.deepGreen.withValues(alpha: 0.14),
+              ),
+              elevation: const WidgetStatePropertyAll(6),
+              padding: const WidgetStatePropertyAll(EdgeInsets.all(8)),
+              alignment: Alignment.bottomRight,
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  side: const BorderSide(color: LandingColors.line),
+                ),
+              ),
+            ),
+            menuChildren: [
+              for (final link in [
+                (label: l10n.landingMissionTitle, action: onMission),
+                (label: l10n.landingApplicationTitle, action: onApplication),
+                (label: l10n.landingNavAbout, action: onAbout),
+                (label: l10n.landingNavInterested, action: onInterested),
+                (label: l10n.landingNavSupport, action: onSupport),
+              ])
+                MenuItemButton(
+                  onPressed: link.action,
+                  style: MenuItemButton.styleFrom(
+                    foregroundColor: LandingColors.ink,
+                    overlayColor: LandingColors.mist,
+                    minimumSize: const Size(220, 48),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(link.label),
+                ),
+              const Divider(color: LandingColors.line, height: 16),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                child: LanguagePicker(),
+              ),
+            ],
+            builder: (context, controller, child) => IconButton(
+              tooltip: MaterialLocalizations.of(context).showMenuTooltip,
+              onPressed: () =>
+                  controller.isOpen ? controller.close() : controller.open(),
+              style: IconButton.styleFrom(
+                backgroundColor: LandingColors.mist,
+                foregroundColor: LandingColors.green,
+                minimumSize: const Size(48, 48),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              icon: const Icon(Icons.menu_rounded),
+            ),
+          ),
+        ],
+      );
+    }
+
     final links = <Widget>[
       _NavLink(label: l10n.landingMissionTitle, onTap: onMission),
       _NavLink(label: l10n.landingApplicationTitle, onTap: onApplication),
@@ -54,20 +129,16 @@ class LandingTopBar extends StatelessWidget {
                 ),
               ),
             ),
-            if (showLinks) Row(mainAxisSize: MainAxisSize.min, children: links),
-            if (showLinks)
-              Expanded(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.centerRight,
-                  child: const LanguagePicker(),
-                ),
-              )
-            else
-              const LanguagePicker(),
+            Row(mainAxisSize: MainAxisSize.min, children: links),
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerRight,
+                child: const LanguagePicker(),
+              ),
+            ),
           ],
         ),
-        if (!showLinks) Wrap(alignment: WrapAlignment.center, children: links),
       ],
     );
   }
