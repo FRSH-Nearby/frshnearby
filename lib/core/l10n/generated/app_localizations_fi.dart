@@ -1258,15 +1258,15 @@ class AppLocalizationsFi extends AppLocalizations {
   String get landingMissionTitle => 'Missio';
 
   @override
-  String get landingApplicationTitle => 'N?in se toimii';
+  String get landingApplicationTitle => 'Näin se toimii';
 
   @override
   String get landingMissionBody =>
-      'Teemme l?hiruoan l?yt?misest?, ostamisesta ja nauttimisesta helppoa. Yhdist?m?ll? ihmiset suoraan l?hialueen ruoantuottajiin autamme tuottajia ansaitsemaan enemm?n, pid?mme ruoan tuoreena ja vahvistamme paikallisia yhteis?j?.';
+      'Ruuantuotannon kannattavuus heikkenee jatkuvasti. Suurilla vähittäistavaraketjuilla on niin paljon neuvotteluvoimaa, että he painavat hintoja alas, samalla kun ne saavat merkittävän osan voitoista. Valitsemalla suoramyynnin lähituottajat voivat parantaa taloudellista asemaansa ja vahvistaa asemaansa suuria välikasiä vastaan.\n\nFRSH nearbyn avulla tuottajat voivat keskittää tilaukset yhteen sovellukseen, pitää kirjaa tilauksista, saada kuitit ja kirjanpitomateriaalin ja saada lisää näkyvyyttä.';
 
   @override
   String get landingApplicationBody =>
-      'Tutustu siihen, miten FRSH Nearby yhdist?? tuottajat ja asiakkaat tuotteiden jakamisesta tilausten hallintaan.';
+      'Tutustu siihen, miten FRSH Nearby yhdistää tuottajat ja asiakkaat tuotteiden jakamisesta tilausten hallintaan.';
 
   @override
   String get landingNavSupport => 'Tuki';
@@ -1276,37 +1276,37 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get supportIntro =>
-      'Tarvitsetko apua FRSH Nearbyn k?yt?ss?? Kokeile alla olevia vinkkej? tai ota yhteytt? teknisess? ongelmassa.';
+      'Tarvitsetko apua FRSH Nearbyn käytössä? Kokeile alla olevia vinkkejä tai ota yhteyttä teknisessä ongelmassa.';
 
   @override
-  String get supportTroubleshootTitle => 'Nopeat vianm??ritysvinkit';
+  String get supportTroubleshootTitle => 'Nopeat vianmääritysvinkit';
 
   @override
   String get supportTroubleshootBody =>
-      'P?ivit? sivu, jos jokin ei lataudu. Jos ongelma jatkuu, kokeile p?ivitetty? selainta ja tarkista internetyhteytesi.';
+      'Päivitä sivu, jos jokin ei lataudu. Jos ongelma jatkuu, kokeile päivitettyä selainta ja tarkista internetyhteytesi.';
 
   @override
-  String get supportReportTitle => 'Ilmoita teknisest? ongelmasta';
+  String get supportReportTitle => 'Ilmoita teknisestä ongelmasta';
 
   @override
   String get supportReportBody =>
-      'Kerro, mit? yritit tehd?, mit? tapahtui ja miten ongelma toistuu. Mainitse selaimesi, laitteesi ja mahdollinen virheilmoitus. ?l? l?het? salasanoja tai maksutietoja.';
+      'Kerro, mitä yritit tehdä, mitä tapahtui ja miten ongelma toistuu. Mainitse selaimesi, laitteesi ja mahdollinen virheilmoitus. Älä lähetä salasanoja tai maksutietoja.';
 
   @override
-  String get supportContactTitle => 'Ota yhteytt? tukeen';
+  String get supportContactTitle => 'Ota yhteyttä tukeen';
 
   @override
   String get supportContactBody =>
-      'L?het? s?hk?postia osoitteeseen info@frshnearby.com, jos tarvitset apua verkkosivuston tai sovelluksen kanssa.';
+      'Lähetä sähköpostia osoitteeseen info@frshnearby.com, jos tarvitset apua verkkosivuston tai sovelluksen kanssa.';
 
   @override
-  String get supportEmailAction => 'L?het? s?hk?postia';
+  String get supportEmailAction => 'Lähetä sähköpostia';
 
   @override
   String get supportBackHome => 'Takaisin etusivulle';
 
   @override
-  String get supportEmailSubject => 'FRSH Nearby ? tekninen tuki';
+  String get supportEmailSubject => 'FRSH Nearby – tekninen tuki';
 
   @override
   String get landingNavAbout => 'Tarinamme';
@@ -1484,4 +1484,18 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get landingFormPhoneLabel => 'Puhelinnumero (valinnainen)';
+
+  @override
+  String get supportPrivacyTitle => 'Tietosuojakäytäntö';
+
+  @override
+  String get supportPrivacyBody =>
+      'Lue, miten FRSH Nearby kerää, käyttää ja suojaa henkilötietojasi.';
+
+  @override
+  String get supportTermsTitle => 'Käyttöehdot';
+
+  @override
+  String get supportTermsComingSoon =>
+      'Käyttöehtomme ovat pian luettavissa täällä.';
 }

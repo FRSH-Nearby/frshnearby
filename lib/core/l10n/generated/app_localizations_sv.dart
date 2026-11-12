@@ -1254,15 +1254,15 @@ class AppLocalizationsSv extends AppLocalizations {
   String get landingMissionTitle => 'Mission';
 
   @override
-  String get landingApplicationTitle => 'S? fungerar det';
+  String get landingApplicationTitle => 'Så fungerar det';
 
   @override
   String get landingMissionBody =>
-      'Vi g?r det enkelt att hitta, k?pa och njuta av lokal mat. Genom att koppla ihop m?nniskor direkt med n?rliggande matproducenter hj?lper vi producenter att tj?na mer, h?ller maten f?rsk och st?rker lokala gemenskaper.';
+      'Matproduktion blir allt mindre lönsam för producenterna, eftersom mellanhänder och stora detaljhandelskedjor tar en betydande del av vinsterna. Genom att sälja direkt till konsumenterna kan livsmedelsproducenter öka sin lönsamhet, återta kontrollen över prissättningen och stärka sin ställning på marknaden.\n\nMed FRSH nearbys digitala marknadsplattform får livsmedelsproducenter möjlighet att utveckla sin verksamhet, nå nya kunder och ta kontroll över sin framtid.';
 
   @override
   String get landingApplicationBody =>
-      'Uppt?ck hur FRSH Nearby f?r samman producenter och kunder, fr?n att dela produkter till att hantera best?llningar.';
+      'Upptäck hur FRSH Nearby för samman producenter och kunder, från att dela produkter till att hantera beställningar.';
 
   @override
   String get landingNavSupport => 'Support';
@@ -1272,28 +1272,28 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get supportIntro =>
-      'Beh?ver du hj?lp med FRSH Nearby? B?rja med tipsen nedan eller kontakta oss om ett tekniskt problem.';
+      'Behöver du hjälp med FRSH Nearby? Börja med tipsen nedan eller kontakta oss om ett tekniskt problem.';
 
   @override
-  String get supportTroubleshootTitle => 'Snabb fels?kning';
+  String get supportTroubleshootTitle => 'Snabb felsökning';
 
   @override
   String get supportTroubleshootBody =>
-      'Uppdatera sidan om n?got inte laddas. Om problemet forts?tter, prova en uppdaterad webbl?sare och kontrollera din internetanslutning.';
+      'Uppdatera sidan om något inte laddas. Om problemet fortsätter, prova en uppdaterad webbläsare och kontrollera din internetanslutning.';
 
   @override
   String get supportReportTitle => 'Rapportera ett tekniskt problem';
 
   @override
   String get supportReportBody =>
-      'Ber?tta vad du f?rs?kte g?ra, vad som h?nde och hur problemet kan ?terskapas. Ange webbl?sare, enhet och eventuella felmeddelanden. Skicka inte l?senord eller betalningsuppgifter.';
+      'Berätta vad du försökte göra, vad som hände och hur problemet kan återskapas. Ange webbläsare, enhet och eventuella felmeddelanden. Skicka inte lösenord eller betalningsuppgifter.';
 
   @override
   String get supportContactTitle => 'Kontakta supporten';
 
   @override
   String get supportContactBody =>
-      'Mejla info@frshnearby.com om du beh?ver hj?lp med webbplatsen eller applikationen.';
+      'Mejla info@frshnearby.com om du behöver hjälp med webbplatsen eller applikationen.';
 
   @override
   String get supportEmailAction => 'Mejla supporten';
@@ -1305,7 +1305,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get supportEmailSubject => 'FRSH Nearby teknisk support';
 
   @override
-  String get landingNavAbout => 'V?r historia';
+  String get landingNavAbout => 'Vår historia';
 
   @override
   String get landingNavInterested => 'Intresserad?';
@@ -1336,7 +1336,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get landingMapCaption => 'Byggt för närproducerad mat i hela Europa';
 
   @override
-  String get landingAboutTitle => 'V?r historia';
+  String get landingAboutTitle => 'Vår historia';
 
   @override
   String get landingAboutBody =>
@@ -1479,4 +1479,18 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get landingFormPhoneLabel => 'Telefonnummer (valfritt)';
+
+  @override
+  String get supportPrivacyTitle => 'Integritetspolicy';
+
+  @override
+  String get supportPrivacyBody =>
+      'Läs hur FRSH Nearby samlar in, använder och skyddar dina personuppgifter.';
+
+  @override
+  String get supportTermsTitle => 'Användarvillkor';
+
+  @override
+  String get supportTermsComingSoon =>
+      'Våra användarvillkor kommer snart att finnas här.';
 }

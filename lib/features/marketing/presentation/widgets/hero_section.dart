@@ -7,14 +7,9 @@ import 'landing_buttons.dart';
 
 /// Hero: staggered headline over the animated farm scene.
 class HeroSection extends StatefulWidget {
-  const HeroSection({
-    super.key,
-    required this.onJoin,
-    required this.onPrototype,
-  });
+  const HeroSection({super.key, required this.onJoin});
 
   final VoidCallback onJoin;
-  final VoidCallback onPrototype;
 
   @override
   State<HeroSection> createState() => _HeroSectionState();
@@ -112,21 +107,10 @@ class _HeroSectionState extends State<HeroSection>
             const SizedBox(height: 26),
             _staggered(
               2,
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  LandingPrimaryButton(
-                    label: l10n.landingHeroPrimaryCta,
-                    icon: Icons.eco_rounded,
-                    onPressed: widget.onJoin,
-                  ),
-                  LandingSecondaryButton(
-                    label: l10n.landingHeroSecondaryCta,
-                    icon: Icons.play_arrow_rounded,
-                    onPressed: widget.onPrototype,
-                  ),
-                ],
+              LandingPrimaryButton(
+                label: l10n.landingHeroPrimaryCta,
+                icon: Icons.eco_rounded,
+                onPressed: widget.onJoin,
               ),
             ),
           ],

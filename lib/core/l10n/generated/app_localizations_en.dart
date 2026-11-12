@@ -1256,7 +1256,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingMissionBody =>
-      'We make local food easy to discover, buy and enjoy. By connecting people directly with nearby food producers, we help producers earn more, keep food fresh and strengthen local communities.';
+      'Food production is becoming increasingly less profitable for producers, as intermediaries and large retailers capture a significant share of the profits. By engaging in direct sales to consumers, food producers can increase their profitability, regain control over pricing, and strengthen their position in the market.\n\nWith FRSH nearby\'s digital marketplace, food producers have the opportunity to transform their businesses, reach new customers, and take back control of their future.';
 
   @override
   String get landingApplicationBody =>
@@ -1478,4 +1478,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingFormPhoneLabel => 'Phone (optional)';
+
+  @override
+  String get supportPrivacyTitle => 'Privacy Policy';
+
+  @override
+  String get supportPrivacyBody =>
+      'Read how FRSH Nearby collects, uses, and protects your personal data.';
+
+  @override
+  String get supportTermsTitle => 'Terms and Conditions';
+
+  @override
+  String get supportTermsComingSoon =>
+      'Our Terms and Conditions will be available here soon.';
 }

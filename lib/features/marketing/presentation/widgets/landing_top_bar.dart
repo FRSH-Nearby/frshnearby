@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/generated/app_localizations.dart';
 import '../marketing_tokens.dart';
-import 'hover_lift.dart';
-import 'language_flag_picker.dart';
+import 'language_picker.dart';
 
-/// Landing top bar: green wordmark, section links, flag picker, prototype CTA.
+/// Landing top bar: green wordmark, section links, and language menu.
 ///
 /// Uses a text wordmark instead of the logo asset — the logo (and its colors)
 /// is being replaced, so the brand here leans on the green theme only.
@@ -18,7 +17,6 @@ class LandingTopBar extends StatelessWidget {
     required this.onAbout,
     required this.onInterested,
     required this.onSupport,
-    required this.onPrototype,
   });
 
   final VoidCallback? onHome;
@@ -27,14 +25,12 @@ class LandingTopBar extends StatelessWidget {
   final VoidCallback onAbout;
   final VoidCallback onInterested;
   final VoidCallback onSupport;
-  final VoidCallback onPrototype;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final width = MediaQuery.sizeOf(context).width;
     final showLinks = width >= 1080;
-    final compact = width < 560;
 
     final links = <Widget>[
       _NavLink(label: l10n.landingMissionTitle, onTap: onMission),
@@ -49,43 +45,26 @@ class LandingTopBar extends StatelessWidget {
       children: [
         Row(
           children: [
-            InkWell(
-              onTap: onHome,
-              child: _Wordmark(compact: width < 460),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                  onTap: onHome,
+                  child: _Wordmark(compact: width < 460),
+                ),
+              ),
             ),
-            const Spacer(),
-            if (showLinks) ...[...links, const SizedBox(width: 8)],
-            const LanguageFlagPicker(),
-            SizedBox(width: compact ? 8 : 16),
-            HoverLift(
-              child: compact
-                  ? IconButton.filledTonal(
-                      onPressed: onPrototype,
-                      tooltip: l10n.landingNavPrototype,
-                      style: IconButton.styleFrom(
-                        backgroundColor: LandingColors.mist,
-                        foregroundColor: LandingColors.green,
-                      ),
-                      icon: const Icon(Icons.play_arrow_rounded),
-                    )
-                  : FilledButton.tonalIcon(
-                      onPressed: onPrototype,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: LandingColors.mist,
-                        foregroundColor: LandingColors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        textStyle: const TextStyle(fontWeight: FontWeight.w800),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                      ),
-                      icon: const Icon(Icons.play_arrow_rounded, size: 20),
-                      label: Text(l10n.landingNavPrototype),
-                    ),
-            ),
+            if (showLinks) Row(mainAxisSize: MainAxisSize.min, children: links),
+            if (showLinks)
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerRight,
+                  child: const LanguagePicker(),
+                ),
+              )
+            else
+              const LanguagePicker(),
           ],
         ),
         if (!showLinks) Wrap(alignment: WrapAlignment.center, children: links),

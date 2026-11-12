@@ -89,8 +89,6 @@ class _MarketingHomeScreenState extends ConsumerState<MarketingHomeScreen> {
     );
   }
 
-  void _openPrototype() => context.go(AppRoutes.prototype);
-
   @override
   Widget build(BuildContext context) {
     _syncDefaultCountry(Localizations.localeOf(context));
@@ -132,13 +130,9 @@ class _MarketingHomeScreenState extends ConsumerState<MarketingHomeScreen> {
                             onAbout: () => _scrollTo(_aboutKey),
                             onInterested: () => _scrollTo(_formKey),
                             onSupport: () => context.push(AppRoutes.support),
-                            onPrototype: _openPrototype,
                           ),
                         const SizedBox(height: 18),
-                        HeroSection(
-                          onJoin: () => _scrollTo(_formKey),
-                          onPrototype: _openPrototype,
-                        ),
+                        HeroSection(onJoin: () => _scrollTo(_formKey)),
                         const SizedBox(height: 64),
                         RevealOnScroll(
                           key: _missionKey,

@@ -388,7 +388,7 @@
   "verifiedCustomerLabel": "Verified customer",
   "landingMissionTitle": "Mission",
   "landingApplicationTitle": "How it works",
-  "landingMissionBody": "We make local food easy to discover, buy and enjoy. By connecting people directly with nearby food producers, we help producers earn more, keep food fresh and strengthen local communities.",
+  "landingMissionBody": "Food production is becoming increasingly less profitable for producers, as intermediaries and large retailers capture a significant share of the profits. By engaging in direct sales to consumers, food producers can increase their profitability, regain control over pricing, and strengthen their position in the market.\n\nWith FRSH nearby's digital marketplace, food producers have the opportunity to transform their businesses, reach new customers, and take back control of their future.",
   "landingApplicationBody": "Discover how FRSH Nearby brings producers and customers together, from sharing products to managing orders.",
   "landingNavSupport": "Support",
   "supportTitle": "Technical support",
@@ -454,5 +454,9 @@
   "prototypeChooserSubtitle": "Pick the side you want to test first.",
   "prototypeFarmerHint": "Dashboard, orders, listings, insights",
   "prototypeConsumerHint": "Nearby food, farm profiles, deals, chat",
-  "landingFormPhoneLabel": "Phone (optional)"
+  "landingFormPhoneLabel": "Phone (optional)",
+  "supportPrivacyTitle": "Privacy Policy",
+  "supportPrivacyBody": "Read how FRSH Nearby collects, uses, and protects your personal data.",
+  "supportTermsTitle": "Terms and Conditions",
+  "supportTermsComingSoon": "Our Terms and Conditions will be available here soon."
 }

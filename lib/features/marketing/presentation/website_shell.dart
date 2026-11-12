@@ -31,7 +31,6 @@ class WebsiteShell extends StatelessWidget {
                 onAbout: () => openSection('about'),
                 onInterested: () => openSection('interested'),
                 onSupport: () => context.go(AppRoutes.support),
-                onPrototype: () => context.go(AppRoutes.prototype),
               ),
             ),
             const Divider(height: 1, color: LandingColors.line),

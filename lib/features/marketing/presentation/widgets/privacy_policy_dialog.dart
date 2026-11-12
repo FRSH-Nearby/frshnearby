@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../marketing_tokens.dart';
-import 'language_flag_picker.dart';
+import 'language_picker.dart';
 import 'landing_footer.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
@@ -35,7 +35,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                           if (!kIsWeb) ...[
                             const Align(
                               alignment: Alignment.centerRight,
-                              child: LanguageFlagPicker(),
+                              child: LanguagePicker(),
                             ),
                             const SizedBox(height: 32),
                           ],

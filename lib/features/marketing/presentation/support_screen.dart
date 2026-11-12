@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/l10n/generated/app_localizations.dart';
+import '../../../core/router/app_routes.dart';
 import 'marketing_tokens.dart';
 import 'widgets/landing_footer.dart';
-import 'widgets/language_flag_picker.dart';
+import 'widgets/language_picker.dart';
 import 'widgets/mission_section.dart';
 
 class SupportScreen extends StatelessWidget {
@@ -34,7 +36,7 @@ class SupportScreen extends StatelessWidget {
                         if (!kIsWeb) ...[
                           const Align(
                             alignment: Alignment.centerRight,
-                            child: LanguageFlagPicker(),
+                            child: LanguagePicker(),
                           ),
                           const SizedBox(height: 32),
                         ],
@@ -72,6 +74,28 @@ class SupportScreen extends StatelessWidget {
                             icon: const Icon(Icons.mail_outline_rounded),
                             label: Text(l10n.supportEmailAction),
                           ),
+                        ),
+                        const SizedBox(height: 16),
+                        _SupportCard(
+                          icon: Icons.privacy_tip_outlined,
+                          title: l10n.supportPrivacyTitle,
+                          body: l10n.supportPrivacyBody,
+                          action: FilledButton.icon(
+                            onPressed: () =>
+                                context.push(AppRoutes.privacyPolicy),
+                            style: FilledButton.styleFrom(
+                              backgroundColor: LandingColors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                            icon: const Icon(Icons.open_in_new_rounded),
+                            label: Text(l10n.supportPrivacyTitle),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        _SupportCard(
+                          icon: Icons.description_outlined,
+                          title: l10n.supportTermsTitle,
+                          body: l10n.supportTermsComingSoon,
                         ),
                         const SizedBox(height: 48),
                         if (!kIsWeb) const LandingFooter(),
